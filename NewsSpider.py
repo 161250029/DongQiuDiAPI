@@ -5,8 +5,6 @@ from lxml import etree
 
 import requests
 
-import JsonUtil
-
 
 ### 抓取懂球帝新闻id
 class NewsSpider:
@@ -14,7 +12,7 @@ class NewsSpider:
     def __init__(self):
 
         self.base_url = "https://www.dongqiudi.com/api/app/tabs/web/{}.json"  # 基础url
-        self.label_num = [3, 4, 5, 6]  # 新闻标签数字（英超、意甲、德甲、西甲）
+        self.label_num = [3,4]  # 新闻标签数字（英超、意甲、德甲、西甲）
         self.start_urls = []  # 爬取的新闻列表页链接
         # 初始url
         for num in self.label_num:
@@ -99,4 +97,3 @@ class NewsSpider:
         return article_list
 if __name__ == "__main__":
     spider = NewsSpider()
-    print(len(spider.work_on(1)))

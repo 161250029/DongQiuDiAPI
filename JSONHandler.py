@@ -44,7 +44,7 @@ def get_article_user_infos(article_id):
 
 
 def get_user_info(user_id):
-    url = "https://api.dongqiudi.com/users/profile/" +user_id + "?version=230&platform=android"
+    url = "https://api.dongqiudi.com/users/profile/" + str(user_id) + "?version=230&platform=android"
     user_json_data = requests.get(url , headers = headers)
     user_info = json.loads(user_json_data.text)
     user_real_info = user_info['user']
@@ -63,17 +63,17 @@ def get_user_info(user_id):
     return new_user_info_dic
 
 def get_user_following(user_id):
-    url = "https://api.dongqiudi.com/user/following/" + user_id
+    url = "https://api.dongqiudi.com/user/following/" + str(user_id)
     user_following_infos = {}
     user_json_following_data = requests.get(url, headers=headers)
     user_following_data = json.loads(user_json_following_data.text)
     user_following_infos['userid'] = user_id
-    user_following_infos['total'] = user_following_data['total']
+    #user_following_infos['total'] = user_following_data['total']
     user_following_infos['data'] = user_following_data['data']
     return user_following_infos
 
 def get_user_follower(user_id):
-    url = "https://api.dongqiudi.com/user/followers/" + user_id
+    url = "https://api.dongqiudi.com/user/followers/" + str(user_id)
     user_follower_dic = {}
     user_json_follower_data = requests.get(url , headers=headers)
     user_follower_data = json.loads(user_json_follower_data.text)
@@ -88,6 +88,7 @@ if __name__ == '__main__':
     # print(get_user_info('13484027'))
 
     print(get_user_following('13484027'))
+
     print(get_user_follower('13484027'))
 
     # print(get_article_user_infos("1667029"))
