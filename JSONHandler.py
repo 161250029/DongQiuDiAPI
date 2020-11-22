@@ -81,9 +81,12 @@ def get_user_following(user_id):
 
 def get_user_follower(user_id):
     url = "https://api.dongqiudi.com/user/followers/" + str(user_id)
-    user_follower_dic = {}
+    user_follower_infos = {}
     user_json_follower_data = requests.get(url , headers=headers)
     user_follower_data = json.loads(user_json_follower_data.text)
+    print(user_follower_data)
+    user_follower_infos['userid'] = user_id
+    user_follower_infos['data'] = user_follower_data['data']
     return user_follower_data
 
 if __name__ == '__main__':
@@ -94,27 +97,28 @@ if __name__ == '__main__':
     # JsonUtil.dump('user.json' , json.dumps(get_user_info('13484027')))
     # print(get_user_info('13484027'))
 
-    #print(get_user_following('13484027'))
+    print(get_user_following('13484027'))
 
-    result = []
-    data = []
-    with open('test.json' , 'r') as f:
-        data = json.load(f)
-    for u in data:
-        result.append(get_user_info(u['user_id']))
-        print(get_user_info(u['user_id']))
-    for user_info in result:
-        if user_info == None:
-            continue
-        if user_info['region'] != None and user_info['hometeam'] != None:
-            #filter_user_infos.append(user_info)
-            JsonUtil.dump_line("user_info.json" , user_info)
-        user_followings = get_user_following(user_info['id'])
-        user_followings_data = user_followings['data']
-        print(str(user_info['id']) + " " + str(user_info['username']) + " " + str(user_info['gender']))
-        for u in user_followings_data:
-            print(str(user_info['id']) + " " + str(u['id']))
-            print(str(u['id']) + " "+ str(u['username']) + " " + str(u['gender']))
+    # result = []
+    # data = []
+    # with open('test.json' , 'r') as f:
+    #     data = json.load(f)
+    # for u in data:
+    #     result.append(get_user_info(u['user_id']))
+    #     print(get_user_info(u['user_id']))
+    # for user_info in result:
+    #     if user_info == None:
+    #         continue
+    #     if user_info['region'] != None and user_info['hometeam'] != None:
+    #         #filter_user_infos.append(user_info)
+    #         JsonUtil.dump_line("user_info.json" , user_info)
+    #     user_followings = get_user_following(user_info['id'])
+    #     user_followings_data = user_followings['data']
+    #     print(str(user_info['id']) + " " + str(user_info['username']) + " " + str(user_info['gender']))
+    #     for u in user_followings_data:
+    #         print(str(user_info['id']) + " " + str(u['id']))
+    #         print(str(u['id']) + " "+ str(u['username']) + " " + str(u['gender']))
+
     #print(get_user_follower('13484027'))
 
     # print(get_article_user_infos("1667029"))
