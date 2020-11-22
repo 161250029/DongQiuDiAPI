@@ -14,6 +14,7 @@ def dump_line(filename , json_str):
         file_obj.write("\n")
 
 
+
 if __name__ == '__main__':
     dic = {
         "user": {
